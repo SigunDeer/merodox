@@ -505,6 +505,21 @@ a:hover {
     background-color: rgba(22, 27, 34, 0.5);
 }
 
+.repo-card .trust-notes details summary {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.repo-card .trust-notes details summary:focus, .repo-card .trust-notes details summary:hover {
+    color: var(--accent-primary);
+}
+
+.repo-card .trust-notes details[open] summary {
+    color: var(--accent-primary);
+}
+
 .trust-list {
     list-style: none;
     font-size: 0.8rem;
@@ -825,6 +840,21 @@ a:hover {
 
 .trust-notes {
     background-color: rgba(22, 27, 34, 0.5);
+}
+
+.repo-card .trust-notes details summary {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.repo-card .trust-notes details summary:focus, .repo-card .trust-notes details summary:hover {
+    color: var(--accent-primary);
+}
+
+.repo-card .trust-notes details[open] summary {
+    color: var(--accent-primary);
 }
 
 .trust-list {
