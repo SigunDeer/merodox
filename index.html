@@ -55,12 +55,20 @@
         </div>
     </section>
 
+    <!-- Arama Kutusu -->
+    <div class="search-container">
+        <div class="container search-wrapper">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.09 14 9.5 14c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5c2.49 0 4.5 2.01 4.5 4.5s-2.01 4.5-4.5 4.5z"/></svg>
+            <input type="text" id="search-input" placeholder="Repo veya video ara: Context7, Ollama, ..." />
+        </div>
+    </section>
+
     <!-- Main Content Container -->
     <main class="container main-content">
         
         <div class="section-header">
             <h2>İncelemeler ve Video İçerikleri</h2>
-            <p>Videolarda bahsettiğimiz komut ve kaynaklar aşağıda listelenmiştir.</p>
+            <p>Merodox Instagram videolarında incelediğimiz açık kaynak AI repolarının kaynakları, kurulum bilgileri ve demo promptları aşağıda listelenmiştir.</p>
         </div>
 
         <!-- Repo Cards Grid -->
@@ -90,10 +98,7 @@
                     
                     <!-- Kurulum Bilgisi -->
                     <div class="info-block">
-                        <div class="block-label">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                            Kurulum Komutu
-                        </div>
+                        <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Kurulum Komutu</div>
                         <div class="code-box">
                             <code id="cmd-ctx7">npx ctx7 setup</code>
                             <button class="copy-btn" onclick="copyText('cmd-ctx7', this)">Kopyala</button>
@@ -103,10 +108,7 @@
 
                     <!-- Demo Promptu -->
                     <div class="info-block">
-                        <div class="block-label">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-                            Demo Promptu (Video İçeriği İçin Hazırlık)
-                        </div>
+                        <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg> Demo Prompt</div>
                         <div class="code-box prompt-box">
                             <code id="prompt-ctx7">Create a Next.js proxy that checks for a valid JWT in cookies and redirects unauthenticated users to `/login`. use context7</code>
                             <button class="copy-btn" onclick="copyText('prompt-ctx7', this)">Kopyala</button>
@@ -116,25 +118,18 @@
 
                     <!-- Doğrulama & İnceleme Notları -->
                     <div class="info-block trust-notes">
-                        <div class="block-label">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                            Doğrulama ve İnceleme Detayları
-                        </div>
+                        <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Doğrulama ve İnceleme Detayları</div>
                         <ul class="trust-list">
-                            <li><strong>Repo Sahibi / Organizasyon:</strong> Upstash (Açık kaynak istemci paketleri sunar).</li>
-                            <li><strong>Lisans:</strong> MIT Lisansı (İstemci / CLI / SDK paketleri kapsanır).</li>
                             <li><strong>Kontrol Tarihi:</strong> 3 Kasım 2026.</li>
-                            <li><strong>Kontrol Kapsamı:</strong> Resmî GitHub deposu, lisans belgesi, `npx ctx7 setup` kurulum adımları ve yerel demo prompt denemesi.</li>
-                            <li><strong>Önemli Sınırlama:</strong> Bu inceleme bağımsız bir güvenlik denetimi değildir. İndeksleme ve arama arka plan sunucuları kapalı kaynak olarak Upstash bulutunda çalışır. Yıldız sayısı anlık değiştiği için doğrudan GitHub sayfasından kontrol edilebilir.</li>
+                            <li><strong>Kapsam:</strong> Resmî GitHub deposu, lisans belgesi, kurulum adımları ve demo prompt denemesi.</li>
+                            <li><strong>Sınırlama:</strong> Bu inceleme bağımsız bir güvenlik denetimi değildir. Arka plan sunucuları kapalı kaynak olarak Upstash bulutunda çalışır.</li>
                         </ul>
                     </div>
 
                 </div>
 
                 <div class="card-footer">
-                    <a href="https://github.com/upstash/context7" target="_blank" rel="noopener noreferrer" class="primary-link-btn">
-                        GitHub'da İncele ↗
-                    </a>
+                    <a href="https://github.com/upstash/context7" target="_blank" rel="noopener noreferrer" class="primary-link-btn">GitHub'da İncele ↗</a>
                 </div>
             </article>
 
