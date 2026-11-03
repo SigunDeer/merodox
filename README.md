@@ -1,6 +1,6 @@
-# Merodox - GitHub Pages Kaynak Sitesi
+# Merodox - GitHub Pages İçerik Sitesi
 
-Bu depo, **Merodox** Instagram kanalı (`@merodox.ai`) için yayınlanan GitHub repoları, kurulum adımları, demo promptları ve inceleme notlarını içerir.
+Bu depo, **Merodox** Instagram kanalı (`@merodox.ai`) için yayınlanan açık kaynak GitHub repoları, kurulum adımları, demo promptları ve inceleme notlarını içerir.
 
 ---
 
@@ -18,7 +18,7 @@ Bu depo, **Merodox** Instagram kanalı (`@merodox.ai`) için yayınlanan GitHub 
 
 ---
 
-## 📋 Şeffaflık & İnceleme İlkeleri
+## 📋 Şeffaflik ve Açıklık İlkeleri
 
 - **Doğrulanmış Bilgiler:** Sitede yalnızca resmî GitHub deposundan veya üretici dokümantasyonundan kontrol edilen kurulum komutları ve lisanslar yer alır.
 - **Dinamik Yıldız Sayısı:** Yıldız sayıları sabit veya mükemmel doğrulanmış gibi sunulmaz; ilgili aracın resmî GitHub deposuna yönlendirme yapılır.
@@ -27,10 +27,10 @@ Bu depo, **Merodox** Instagram kanalı (`@merodox.ai`) için yayınlanan GitHub 
 
 ---
 
-## 📽️ Videolar & Repolar
+## 📚 İçerik Hazırlıkları ve Repo Notları
 
-- **Video #1: Context7 (`upstash/context7`)**
-  - **Ne İş Yapar:** Desteklenen AI kodlama araçlarına güncel kütüphane dokümantasyonu sağlamaya yardımcı olur.
+- **Context7 (`upstash/context7`)** (Video #1 İçin Hazırlık Aşamasında)
+  - **Ne İş Yapar:** Desteklenen yapay zeka kodlama araçlarına (Cursor, Claude Code, VS Code vb.) güncel ve sürüme özel kütüphane dokümantasyonu sağlamaya yardımcı olur. Prompt sonuna eklenen yönlendirme ile ilgili doküman bağlamını asistana iletir.
   - **Kurulum:** `npx ctx7 setup` (Node.js 22.13+)
   - **Demo Prompt:** `Create a Next.js proxy that checks for a valid JWT in cookies and redirects unauthenticated users to /login. use context7`
   - **Lisans:** MIT
