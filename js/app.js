@@ -1,191 +1,227 @@
-// Merodox Website JavaScript Application
-// Video verilerini dinamik olarak yükleme, arama ve kopyalama işlevleri
+/**
+ * Merodox Astryx-Inspired Curation Platform Application
+ */
 
-import videos from './videos.js';
+import { videos } from './videos.js';
 
-// Helper: Video verilerini işleme
-function renderVideos(filter = '') {
-    const grid = document.getElementById('repo-grid');
-    if (!grid) return;
+let currentCategory = 'all';
+let searchQuery = '';
 
-    grid.innerHTML = '';
+// DOM Elements
+const gridEl = document.getElementById('repo-grid');
+const countEl = document.getElementById('repo-count');
+const emptyStateEl = document.getElementById('empty-state');
+const searchInput = document.getElementById('search-input');
+const filterBtns = document.querySelectorAll('.filter-btn');
+const themeToggleBtn = document.getElementById('theme-toggle');
 
-    const filtered = videos.filter(v => {
-        const matches = v.title.toLowerCase().includes(filter) ||
-            v.repo.toLowerCase().includes(filter) ||
-            v.category.toLowerCase().includes(filter);
-        return matches;
-    });
+// Modal Elements
+const modalEl = document.getElementById('repo-modal');
+const modalCloseBtn = document.getElementById('modal-close');
+const modalCategory = document.getElementById('modal-category');
+const modalTitle = document.getElementById('modal-title');
+const modalDescription = document.getElementById('modal-description');
+const modalSetup = document.getElementById('modal-setup');
+const modalPrompt = document.getElementById('modal-prompt');
+const modalReviewList = document.getElementById('modal-review-list');
+const modalGithubLink = document.getElementById('modal-github-link');
+const resetFiltersBtn = document.getElementById('reset-filters-btn');
 
-    // Draft (hazırlık aşaması) videoları en başa koy
-    const drafts = filtered.filter(v => v.status === 'draft');
-    const published = filtered.filter(v => v.status === 'published');
-    const all = [...drafts, ...published];
+// Theme Management
+function initTheme() {
+    const savedTheme = localStorage.getItem('merodox_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
 
-    all.forEach(video => {
-        const card = createVideoCard(video);
-        grid.appendChild(card);
-    });
-
-    // Eğer hiç içerik yoksa boş durum mesajı göster
-    if (all.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'empty-state';
-        empty.innerHTML = `<p>Aradığınız kriterlere uygun içerik bulunamadı.</p>`;
-        grid.appendChild(empty);
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('merodox_theme', newTheme);
+        });
     }
 }
 
-function createVideoCard(video) {
-    const article = document.createElement('article');
-    article.className = `repo-card ${video.status === 'draft' ? 'draft' : ''}`;
+// Render Repositories
+function renderRepos() {
+    if (!gridEl) return;
 
-    const badgeStatus = video.status === 'draft' ? 
-        `<span class="video-badge upcoming">Video #${video.id} - Hazırlık Aşamasında</span>` :
-        `<span class="video-badge">Video #${video.id}</span>`;
+    gridEl.innerHTML = '';
 
-    const badgeLicense = `<span class="license-badge">${video.license} Lisansı</span>`;
+    const filtered = videos.filter(repo => {
+        const matchesCategory = currentCategory === 'all' || repo.category === currentCategory;
+        const matchesSearch = repo.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            repo.repo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            repo.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            repo.category.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
 
-    const trustIndicator = video.status === 'draft' ? 
-        `<div class="info-block trust-notes">
-            <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Doğrulama ve İnceleme Detayları</div>
-            <ul class="trust-list">
-                <li><strong>Kontrol Tarihi:</strong> ${video.reviewDate}</li>
-                <li><strong>Kapsam:</strong> ${video.reviewScope}</li>
-                <li><strong>Sınırlama:</strong> ${video.limitations}</li>
-            </ul>
-        </div>` :
-        `<div class="info-block trust-notes">
-            <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Güvenilirlik ve Lisans</div>
-            <ul class="trust-list">
-                <li><strong>Repo Sahibi / Organizasyon:</strong> ${video.repo.split('/')[0]}</li>
-                <li><strong>Lisans:</strong> ${video.license} Lisansı</li>
-                <li><strong>Yıldız Sayısı:</strong> Resmî GitHub sayfasından kontrol edilir.</li>
-            </ul>
-        </div>`;
+    if (countEl) {
+        countEl.textContent = `${filtered.length} Repo`;
+    }
 
-    const cardHTML = `
-        <div class="card-header">
-            <div class="card-tag-wrapper">
-                ${badgeStatus}
-                ${badgeLicense}
-            </div>
-        </div>
+    if (filtered.length === 0) {
+        emptyStateEl.classList.remove('hidden');
+        gridEl.classList.add('hidden');
+        return;
+    } else {
+        emptyStateEl.classList.add('hidden');
+        gridEl.classList.remove('hidden');
+    }
 
-        <h3 class="repo-title">
-            <a href="${video.repoUrl}" target="_blank" rel="noopener noreferrer">${video.repo}</a>
-        </h3>
+    filtered.forEach(repo => {
+        const card = document.createElement('div');
+        card.className = 'repo-card';
 
-        <p class="repo-summary">
-            ${video.title} — ${video.category} kategorisindeki araçlar için ${video.status === 'draft' ? 'hazırlık aşamasında' : 'test edilmiş'} kaynak.
-        </p>
-
-        <div class="info-block-group">
-            <div class="info-block">
-                <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Kurulum Komutu</div>
-                <div class="code-box">
-                    <code id="cmd-${video.id}">${video.setupCommand}</code>
-                    <button class="copy-btn" onclick="copyText('cmd-${video.id}', this)">Kopyala</button>
+        card.innerHTML = `
+            <div>
+                <div class="card-top">
+                    <div class="card-tags">
+                        <span class="tag-category">${repo.category}</span>
+                        <span class="tag-license">${repo.license}</span>
+                    </div>
+                    <span class="star-badge" title="GitHub Yıldızları">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        ${repo.stars}
+                    </span>
                 </div>
-                <span class="req-note">⚙️ Gereksinim: Node.js 22.13 veya üzeri.</span>
-            </div>
-
-            <div class="info-block">
-                <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg> Demo Prompt</div>
-                <div class="code-box prompt-box">
-                    <code id="prompt-${video.id}">${video.prompt}</code>
-                    <button class="copy-btn" onclick="copyText('prompt-${video.id}', this)">Kopyala</button>
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <a href="${repo.repoUrl}" target="_blank" rel="noopener noreferrer">${repo.repo}</a>
+                    </h3>
+                    <p class="card-desc">${repo.description}</p>
                 </div>
-                <span class="usage-tip">💡 İpucu: Prompt sonundaki <code>use context7</code> ifadesi yönlendirmeyi tetikler.</span>
             </div>
-            ${trustIndicator}
-        </div>
+            <div class="card-footer">
+                <button class="card-btn btn-primary details-btn" data-id="${repo.id}">
+                    Detaylar & Komutlar
+                </button>
+                <a href="${repo.repoUrl}" target="_blank" rel="noopener noreferrer" class="card-btn btn-secondary">
+                    GitHub ↗
+                </a>
+            </div>
+        `;
 
-        <div class="card-footer">
-            <a href="${video.repoUrl}" target="_blank" rel="noopener noreferrer" class="primary-link-btn">GitHub'da İncele ↗</a>
-        </div>
-    `;
+        // Detay butonu tetikleyicisi
+        const detailsBtn = card.querySelector('.details-btn');
+        detailsBtn.addEventListener('click', () => openModal(repo));
 
-    article.innerHTML = cardHTML;
-    return article;
+        gridEl.appendChild(card);
+    });
 }
 
-// Arama işlevi
-function setupSearch() {
-    const searchInput = document.getElementById('search-input');
+// Modal Açma
+function openModal(repo) {
+    if (!modalEl) return;
+
+    modalCategory.textContent = repo.category;
+    modalTitle.textContent = repo.repo;
+    modalDescription.textContent = repo.description;
+    modalSetup.textContent = repo.setupCommand;
+    modalPrompt.textContent = repo.prompt;
+    modalGithubLink.href = repo.repoUrl;
+
+    modalReviewList.innerHTML = `
+        <li><strong>Neden Seçildi:</strong> ${repo.whyToUse}</li>
+        <li><strong>Kontrol Tarihi:</strong> ${repo.reviewDate}</li>
+        <li><strong>Kontrol Kapsamı:</strong> ${repo.reviewScope}</li>
+        <li><strong>Sınırlamalar:</strong> ${repo.limitations}</li>
+    `;
+
+    modalEl.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Modal Kapatma
+function closeModal() {
+    if (!modalEl) return;
+    modalEl.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+// Setup Event Listeners
+function initListeners() {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.trim().toLowerCase();
-            renderVideos(query);
+            searchQuery = e.target.value.trim();
+            renderRepos();
         });
     }
-}
 
-// Arama kutusu ekleme
-function addSearchBar() {
-    const main = document.querySelector('.main-content');
-    if (!main) return;
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
 
-    const searchContainer = document.createElement('div');
-    searchContainer.className = 'search-container';
-    searchContainer.innerHTML = `
-        <div class="search-wrapper">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.09 14 9.5 14c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5c2.49 0 4.5 2.01 4.5 4.5s-2.01 4.5-4.5 4.5z"/></svg>
-            <input type="text" id="search-input" placeholder="Repo veya video ara: Context7, Ollama, ..." />
-        </div>
-    `;
-    main.insertBefore(searchContainer, main.firstChild);
-}
-
-// Kopyalama işlevi (önceki gibi)
-function copyText(elementId, buttonEl) {
-    const textElement = document.getElementById(elementId);
-    if (!textElement) return;
-    const textToCopy = textElement.innerText || textElement.textContent;
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            showCopyFeedback(buttonEl);
-        }).catch(err => {
-            fallbackCopy(textToCopy, buttonEl);
+            currentCategory = btn.getAttribute('data-category');
+            renderRepos();
         });
-    } else {
-        fallbackCopy(textToCopy, buttonEl);
+    });
+
+    if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', () => {
+            currentCategory = 'all';
+            searchQuery = '';
+            if (searchInput) searchInput.value = '';
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                if (b.getAttribute('data-category') === 'all') {
+                    b.classList.add('active');
+                    b.setAttribute('aria-selected', 'true');
+                }
+            });
+            renderRepos();
+        });
     }
-}
 
-function fallbackCopy(text, buttonEl) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    textarea.style.pointerEvents = 'none';
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-        document.execCommand('copy');
-        showCopyFeedback(buttonEl);
-    } catch (e) {
-        console.error('Kopyalama başarısız oldu:', e);
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
     }
-    document.body.removeChild(textarea);
+
+    if (modalEl) {
+        modalEl.addEventListener('click', (e) => {
+            if (e.target === modalEl) {
+                closeModal();
+            }
+        });
+    }
+
+    // ESC tuşu ile modal kapatma
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
 }
 
-function showCopyFeedback(buttonEl) {
-    if (!buttonEl) return;
-    const originalText = buttonEl.innerText;
-    buttonEl.innerText = 'Kopyalandı! ✓';
-    buttonEl.classList.add('copied');
-    setTimeout(() => {
-        buttonEl.innerText = originalText;
-        buttonEl.classList.remove('copied');
-    }, 2000);
-}
+// Global Kopyalama Fonksiyonu (Modal İçin)
+window.copyModalText = function(elementId, buttonEl) {
+    const codeEl = document.getElementById(elementId);
+    if (!codeEl) return;
+    const text = codeEl.textContent || codeEl.innerText;
 
-// Sayfa yüklendiğinde
+    navigator.clipboard.writeText(text).then(() => {
+        const originalText = buttonEl.textContent;
+        buttonEl.textContent = 'Kopyalandı! ✓';
+        buttonEl.classList.add('copied');
+        setTimeout(() => {
+            buttonEl.textContent = originalText;
+            buttonEl.classList.remove('copied');
+        }, 2000);
+    }).catch(err => {
+        console.error('Kopyalama hatası:', err);
+    });
+};
+
+// Initialize App
 document.addEventListener('DOMContentLoaded', () => {
-    renderVideos();
-    setupSearch();
-    addSearchBar();
-    console.log('Merodox web sitesi hazır. Dinamik içerik sistemi aktif.');
+    initTheme();
+    renderRepos();
+    initListeners();
+    console.log('Merodox Astryx-Inspired Platform yüklendi.');
 });

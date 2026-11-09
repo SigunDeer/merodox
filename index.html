@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merodox - İçerik Hazırlıkları ve Repo Notları</title>
+    <title>Merodox - Geliştiriciler İçin Seçilmiş Açık Kaynak Repolar</title>
     
     <!-- SEO & Sosyal Medya Meta Etiketleri -->
-    <meta name="description" content="Merodox Instagram videolarında incelediğimiz açık kaynak AI repoları, kurulum bilgileri, demo promptları ve inceleme notlarını paylaşıyoruz.">
-    <meta name="keywords" content="Merodox, GitHub, Yapay Zeka, AI Repoları, Context7, Upstash, Open Source, Kodlama">
+    <meta name="description" content="Merodox Instagram Reels'lerinde tanıtılan AI ve geliştirici araçlarının resmî repo bağlantıları, denenen promptlar ve kurulum notları.">
+    <meta name="keywords" content="Merodox, GitHub, Yapay Zeka, AI Repoları, Context7, Ollama, Open WebUI, Firecrawl, Open Source">
     <meta name="author" content="Merodox AI">
     <meta name="robots" content="index, follow">
 
-    <!-- Open Graph (Facebook / WhatsApp / LinkedIn) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sigundeer.github.io/merodox/">
-    <meta property="og:title" content="Merodox - İçerik Hazırlıkları ve Repo Notları">
-    <meta property="og:description" content="Merodox Instagram videolarında incelediğimiz açık kaynak AI repoları, kurulum bilgileri, demo promptları ve inceleme notlarını paylaşıyoruz.">
+    <meta property="og:title" content="Merodox - Seçilmiş Açık Kaynak Repolar">
+    <meta property="og:description" content="Geliştiriciler ve üreticiler için küratörlük edilmiş en iyi açık kaynak AI ve geliştirici araçları.">
     <meta property="og:image" content="assets/og-image.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Merodox - İçerik Hazırlıkları ve Repo Notları">
-    <meta name="twitter:description" content="Merodox Instagram videolarında incelediğimiz açık kaynak AI repoları, kurulum bilgileri, demo promptları ve inceleme notlarını paylaşıyoruz.">
+    <meta name="twitter:title" content="Merodox - Seçilmiş Açık Kaynak Repolar">
+    <meta name="twitter:description" content="Geliştiriciler ve üreticiler için küratörlük edilmiş en iyi açık kaynak AI ve geliştirici araçları.">
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -30,14 +30,25 @@
     <!-- Header / Navbar -->
     <header class="site-header">
         <div class="container header-container">
-            <a href="./" class="brand-logo">
-                <span class="logo-accent">MERO</span>DOX<span class="logo-dot">.AI</span>
+            <a href="./" class="brand-logo" aria-label="Merodox Ana Sayfa">
+                <span class="logo-badge-dot"></span>
+                <span class="logo-accent">MERO</span>DOX<span class="logo-sub">/REPOS</span>
             </a>
-            <nav class="nav-links">
-                <a href="https://www.instagram.com/merodox.ai/" target="_blank" rel="noopener noreferrer" class="instagram-btn">
-                    <svg class="icon-ig" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
+            
+            <nav class="nav-links" aria-label="Ana Menü">
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Tema Değiştir" title="Koyu/Açık Mod">
+                    <!-- Sun / Moon Icon -->
+                    <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                
+                <a href="https://github.com/SigunDeer/merodox" target="_blank" rel="noopener noreferrer" class="github-nav-btn" aria-label="GitHub Deposu">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>GitHub</span>
+                </a>
+
+                <a href="https://www.instagram.com/merodox.ai/" target="_blank" rel="noopener noreferrer" class="instagram-nav-btn" aria-label="Instagram Profili">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     <span>@merodox.ai</span>
                 </a>
             </nav>
@@ -46,117 +57,120 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="container">
-            <div class="hero-badge">📌 Reels İçin Hazırlanan Araçlar</div>
-            <h1 class="hero-title">Repo, Prompt ve Kurulum Notları</h1>
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>Seçilmiş Açık Kaynak Repertuvarı</span>
+            </div>
+            <h1 class="hero-title">Geliştiriciler İçin Küratörlük Edilmiş<br>En İyi Açık Kaynak Repolar</h1>
             <p class="hero-description">
-                Merodox Instagram Reels’lerinde tanıtılacak AI ve geliştirici araçlarının resmî repo bağlantıları, denenen promptları ve kurulum notları burada.
+                Merodox Instagram Reels’lerinde incelenen yapay zeka, kodlama ve geliştirici araçlarının resmî repo bağlantıları, kurulum komutları ve denenen promptları tek merkezde.
             </p>
+
+            <!-- Search & Controls Bar -->
+            <div class="search-filter-container">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="search-input" placeholder="Repo ara (örn. context7, ollama, firecrawl)..." aria-label="Repo Ara" autocomplete="off" />
+                </div>
+                
+                <div class="category-filters" id="category-filters" role="tablist" aria-label="Kategoriler">
+                    <button class="filter-btn active" data-category="all" role="tab" aria-selected="true">Tümü</button>
+                    <button class="filter-btn" data-category="AI Kodlama Araçları" role="tab" aria-selected="false">AI Kodlama</button>
+                    <button class="filter-btn" data-category="Yerel AI" role="tab" aria-selected="false">Yerel AI</button>
+                    <button class="filter-btn" data-category="Yerel Arayüz" role="tab" aria-selected="false">Arayüz</button>
+                    <button class="filter-btn" data-category="Otomasyon & Veri" role="tab" aria-selected="false">Otomasyon</button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Arama Kutusu -->
-    <div class="search-container">
-        <div class="container search-wrapper">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.09 14 9.5 14c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5c2.49 0 4.5 2.01 4.5 4.5s-2.01 4.5-4.5 4.5z"/></svg>
-            <input type="text" id="search-input" placeholder="Repo veya video ara: Context7, Ollama, ..." />
-        </div>
-    </section>
-
-    <!-- Main Content Container -->
+    <!-- Main Content -->
     <main class="container main-content">
-        
-        <div class="section-header">
-            <h2>İçerik Hazırlıkları</h2>
-            <p>Merodox Instagram Reels’lerinde tanıtılacak araçların repo bağlantıları, kurulum notları ve demo promptları burada.
-            <br><small>İlk video henüz yayımlanmadı; kaynaklar hazırlanıyor.</small></p>
+        <div class="section-heading">
+            <h2>Küratörlük Listesi</h2>
+            <span id="repo-count" class="repo-count-badge">4 Repo</span>
         </div>
 
-        <!-- Repo Cards Grid -->
+        <!-- Repo Grid -->
         <div class="repo-grid" id="repo-grid">
-            
-            <!-- Video #1 Card: Context7 (Draft) -->
-            <article class="repo-card" id="video-1-context7">
-                <div class="card-header">
-                    <div class="card-tag-wrapper">
-                        <span class="video-badge upcoming">Hazırlık Aşamasında</span>
-                        <span class="license-badge">MIT Lisansı</span>
-                    </div>
-                </div>
+            <!-- JavaScript ile dinamik doldurulacak -->
+        </div>
 
-                <h3 class="repo-title">
-                    <a href="https://github.com/upstash/context7" target="_blank" rel="noopener noreferrer">
-                        upstash/context7
-                    </a>
-                </h3>
-
-                <p class="repo-summary">
-                    Desteklenen yapay zeka kodlama araçlarına (Cursor, Claude Code, VS Code vb.) güncel ve sürüme özel kütüphane dokümantasyonu sağlamaya yardımcı olur. Prompt sonuna eklenen yönlendirme ile ilgili doküman bağlamını asistana iletir.
-                </p>
-
-                <!-- Bilgi Alanları -->
-                <div class="info-block-group">
-                    
-                    <!-- Kurulum Bilgisi -->
-                    <div class="info-block">
-                        <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Kurulum Komutu</div>
-                        <div class="code-box">
-                            <code id="cmd-ctx7">npx ctx7 setup</code>
-                            <button class="copy-btn" onclick="copyText('cmd-ctx7', this)">Kopyala</button>
-                        </div>
-                        <span class="req-note">⚙️ Gereksinim: Node.js 22.13 veya üzeri. (Kaldırmak için: <code>npx ctx7 remove</code>)</span>
-                    </div>
-
-                    <!-- Demo Promptu -->
-                    <div class="info-block">
-                        <div class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg> Demo Prompt</div>
-                        <div class="code-box prompt-box">
-                            <code id="prompt-ctx7">Create a Next.js proxy that checks for a valid JWT in cookies and redirects unauthenticated users to `/login`. use context7</code>
-                            <button class="copy-btn" onclick="copyText('prompt-ctx7', this)">Kopyala</button>
-                        </div>
-                        <span class="usage-tip">💡 İpucu: Prompt sonundaki <code>use context7</code> ifadesi yönlendirmeyi tetikler.</span>
-                    </div>
-
-                    <!-- Doğrulama & İnceleme Notları -->
-                    <details class="info-block trust-notes">
-                        <summary class="block-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> İnceleme Notları</summary>
-                        <ul class="trust-list">
-                            <li><strong>Kontrol Tarihi:</strong> 3 Kasım 2026.</li>
-                            <li><strong>Kapsam:</strong> Resmî GitHub deposu, lisans belgesi, kurulum adımları ve demo prompt denemesi.</li>
-                            <li><strong>Sınırlama:</strong> Bu inceleme bağımsız bir güvenlik denetimi değildir. Arka plan sunucuları kapalı kaynak olarak Upstash bulutunda çalışır.</li>
-                        </ul>
-                    </details>
-
-                </div>
-
-                <div class="card-footer">
-                    <a href="https://github.com/upstash/context7" target="_blank" rel="noopener noreferrer" class="primary-link-btn">GitHub'da İncele ↗</a>
-                </div>
-            </article>
-
-            <!-- Taslak Plan Alanı (Gelecek İçerik İçin) -->
-            
-
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state hidden">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M8 11h6"/></svg>
+            <h3>Aradığınız Kriterlere Uygun Repo Bulunamadı</h3>
+            <p>Farklı bir anahtar kelime deneyebilir veya filtreleri sıfırlayabilirsiniz.</p>
+            <button id="reset-filters-btn" class="reset-btn">Filtreleri Sıfırla</button>
         </div>
     </main>
 
+    <!-- Modal / Drawer for Details -->
+    <div id="repo-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <span id="modal-category" class="modal-category-tag">Kategori</span>
+                    <h3 id="modal-title">Repo Adı</h3>
+                </div>
+                <button id="modal-close" class="modal-close-btn" aria-label="Kapat">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <p id="modal-description" class="modal-desc">Açıklama...</p>
+
+                <div class="modal-section">
+                    <h4>Kurulum Komutu</h4>
+                    <div class="code-container">
+                        <code id="modal-setup">komut</code>
+                        <button class="modal-copy-btn" id="modal-copy-setup" onclick="copyModalText('modal-setup', this)">Kopyala</button>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h4>Örnek Prompt / Kullanım</h4>
+                    <div class="code-container prompt-container">
+                        <code id="modal-prompt">prompt</code>
+                        <button class="modal-copy-btn" id="modal-copy-prompt" onclick="copyModalText('modal-prompt', this)">Kopyala</button>
+                    </div>
+                </div>
+
+                <div class="modal-section review-notes-box">
+                    <h4>İnceleme Notları & Sınırlamalar</h4>
+                    <ul id="modal-review-list">
+                        <!-- Dinamik -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a id="modal-github-link" href="#" target="_blank" rel="noopener noreferrer" class="modal-github-btn">
+                    GitHub'da İncele ↗
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="container footer-content">
+        <div class="container footer-container">
             <div class="footer-brand">
-                <span class="logo-accent">MERO</span>DOX<span class="logo-dot">.AI</span>
-                <p>Merodox Instagram İçerikleri</p>
+                <span class="logo-accent">MERO</span>DOX<span class="logo-sub">/AI</span>
+                <p>Geliştiriciler ve Üreticiler İçin Seçilmiş Açık Kaynak Merkezi</p>
             </div>
             <div class="footer-links">
-                <a href="https://www.instagram.com/merodox.ai/" target="_blank" rel="noopener noreferrer">Instagram Profilimiz</a>
-                <a href="https://github.com/upstash/context7" target="_blank" rel="noopener noreferrer">Context7 GitHub Deposu</a>
+                <a href="https://www.instagram.com/merodox.ai/" target="_blank" rel="noopener noreferrer">Instagram (@merodox.ai)</a>
+                <a href="https://github.com/SigunDeer/merodox" target="_blank" rel="noopener noreferrer">GitHub Deposu</a>
             </div>
             <div class="footer-disclaimer">
-                <p>© 2026 Merodox. Sitede sunulan bilgiler resmî depolardan alınan güncel verilere dayanır; üçüncü taraf bağımsız güvenlik garantisi yerine geçmez.</p>
+                <p>© 2026 Merodox. Sunulan tüm bilgiler resmî depolardan ve belgelendirmelerden alınmıştır; üçüncü taraf güvenlik garantisi yerine geçmez.</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
